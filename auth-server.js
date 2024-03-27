@@ -11,7 +11,8 @@ app.use(bodyParser.json());
 app.use(session({
   secret: 'your-secret-key',    // never hardcode in source code. hard-coded here for demonstration purposes.
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { httpOnly: true, secure: true } // require SSL encryption to fix js/clear-text-cookie
 }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 // Set up CSRF protection

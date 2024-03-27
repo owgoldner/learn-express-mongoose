@@ -10,8 +10,11 @@ function get_book(id) {
 }
 
 function get_book_dtl(id) {
+  // fix sql-injection vulnerability by sanitizing input id
+  const sanitizedId = id.replace(/[^\w\s]/gi, ''); // Remove non-alphanumeric characters
+
   return BookInstance
-          .find({ 'book': id })
+          .find({ 'book': sanitizedId })
           .select('imprint status');
 }
 
